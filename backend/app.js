@@ -12,6 +12,7 @@ import recoveryPasswordRouter from './src/routes/recoveryPassword.js';
 import limiter from './src/middlewares/limiter.js';
 import banners from "./src/routes/banners.js"
 import cartRouter from "./src/routes/cart.js"
+import wompiRoutes from "./src/routes/wompi.js"
 
 import cors from 'cors'; 
 //Importante 
@@ -47,5 +48,6 @@ app.use("/api/logout", logoutRouter)
 app.use("/api/recoveryPassword", recoveryPasswordRouter)
 app.use("/api/banners", banners)
 app.use("/api/cart", cartRouter)
+app.use("/api/wompi", wompiRoutes)
 
 export default app;
