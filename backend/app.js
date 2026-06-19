@@ -14,7 +14,10 @@ import banners from "./src/routes/banners.js"
 import cartRouter from "./src/routes/cart.js"
 import deliveryDriversRoutes from './src/routes/deliveryDrivers.js';
 import wompiRoutes from "./src/routes/wompi.js"
-
+import { validateAuthCookie } from './src/middlewares/authMiddleware.js';
+import adminsRouter from './src/routes/admins.js';
+import loginAdminRouter from './src/routes/loginAdmin.js';
+import registerAdminRouter from './src/routes/registerAdmin.js';
 import cors from 'cors'; 
 //Importante 
 import cookieParser from 'cookie-parser';
@@ -40,7 +43,7 @@ app.use(limiter);
 //Creamos los endpoints
 app.use("/api/products", productsRouter)
 app.use("/api/branches", branchesRouter)
-app.use("/api/employees", employeesRouter)
+app.use("/api/employees", validateAuthCookie(['admin']), employeesRouter)
 app.use("/api/reviews", reviewsRouter)
 app.use("/api/customers", customerRouter)
 app.use("/api/registerCustomers", registerCustomerRouter)
@@ -51,5 +54,8 @@ app.use("/api/banners", banners)
 app.use("/api/cart", cartRouter)
 app.use("/api/wompi", wompiRoutes)
 app.use("/api/deliveryDrivers", deliveryDriversRoutes)
+app.use("/api/admins", validateAuthCookie(['admin']), adminsRouter)
+app.use("/api/loginAdmin", loginAdminRouter)
+app.use("/api/registerAdmin", registerAdminRouter)
 
 export default app;
